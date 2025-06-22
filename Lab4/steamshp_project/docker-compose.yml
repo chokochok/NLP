@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: steam_db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: ./api
+    container_name: fastapi_app
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  airflow-init:
+    image: apache/airflow:2.8.0
+    depends_on:
+      - postgres
+      - api
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/steam_db
+      _PIP_ADDITIONAL_REQUIREMENTS: 'psycopg2-binary requests'
+    entrypoint: /bin/bash
+    command: -c "airflow db init && airflow users create --username airflow --password airflow --firstname admin --lastname airflow --role Admin --email admin@example.com"
+    volumes:
+      - ./airflow_dags:/opt/airflow/dags
+
+  airflow-webserver:
+    image: apache/airflow:2.8.0
+    restart: always
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/steam_db
+      _PIP_ADDITIONAL_REQUIREMENTS: 'psycopg2-binary requests'
+    volumes:
+      - ./airflow_dags:/opt/airflow/dags
+    ports:
+      - "8080:8080"
+    depends_on:
+      - airflow-init
+    command: webserver
+
+  airflow-scheduler:
+    image: apache/airflow:2.8.0
+    restart: always
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/steam_db
+      _PIP_ADDITIONAL_REQUIREMENTS: 'psycopg2-binary requests'
+    volumes:
+      - ./airflow_dags:/opt/airflow/dags
+    depends_on:
+      - airflow-webserver
+    command: scheduler
+
+volumes:
+  pg_data:
