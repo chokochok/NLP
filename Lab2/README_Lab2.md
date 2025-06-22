@@ -11,8 +11,8 @@
 3. **Zero eval** – базова оцінка до навчання.
 4. **Fine tune model** – навчання моделі з логуванням до `wandb`.
 5. **Final eval** – підсумкова оцінка на валідаційному наборі.
-![screenshot](Lab2/wand_bert/Pasted image.png)
-![screenshot](Lab2/wand_bert/Pasted image (2).png)
+![screenshot](/Lab2/wand_bert/Pastedimage.png)
+![screenshot](/Lab2/wand_bert/Pastedimage(2).png)
 
 ### 🔷 `Lab2_llama.ipynb`
 1. **Setup and Installation** – середовище, бібліотеки (`transformers`, `trl`, `peft`).
@@ -25,9 +25,9 @@
 8. **Save the Model Locally** – збереження моделі.
 9. **Load Saved Model** – перевірка збереженої моделі.
 10. **Inference with Streaming (post-training)** – фінальна оцінка.
-![screenshot](Lab2/wand_llama/Pasted image.png)
-![screenshot](Lab2/wand_llama/Pasted image (2).png)
-![screenshot](Lab2/wand_llama/Pasted image (3).png)
+![screenshot](/Lab2/wand_llama/Pastedimage.png)
+![screenshot](/Lab2/wand_llama/Pastedimage(2).png)
+![screenshot](/Lab2/wand_llama/Pastedimage(3).png)
 
 ### 🔷 `Lab2_steam.ipynb`
 - Містить референсну модель STEAM, яка використовується для порівняння точності з fine-tuned версіями BERT та LLaMA.

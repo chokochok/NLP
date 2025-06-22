@@ -31,6 +31,8 @@
 - Pandas / NumPy / Matplotlib
 - JSON / TQDM
 
+![screenshot](/Lab3/Pastedimage.png)
+
 ---
 
 _Робота виконана в рамках лабораторної роботи №3 з курсу з обробки природної мови._
