@@ -41,7 +41,7 @@
 - 🔒 **Приватний скор (Private Score):** `0.27740`
 - 🕒 Сабміт здійснено після дедлайну (late submission)
 
-![screenshot](Pasted image.png)
+![screenshot](NLP/Lab1/Pasted image.png)
 
 ---
 
