@@ -1,7 +1,5 @@
 # 🧠 SteamSHP Project: Preference Modeling via FastAPI + Airflow ETL
 
-![Kaggle Screenshot](assets/kaggle_submission.png)
-
 ## 🔍 Overview
 
 This project implements an end-to-end pipeline to evaluate human preference between two text completions using a small language model. It includes:
